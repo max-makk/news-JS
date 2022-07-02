@@ -1,11 +1,14 @@
 import './news.css';
+import { Item } from '../sources/sources';
+
+type Source = Pick<Item, 'id' | 'name'>;
 
 export interface Article {
     author: string;
     content: string;
     description: string;
     publishedAt: string;
-    source: { id: string; name: string };
+    source: Source;
     title: string;
     url: string;
     urlToImage: string;

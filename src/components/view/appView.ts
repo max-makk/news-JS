@@ -4,15 +4,17 @@ import Sources from './sources/sources';
 import { Item } from './sources/sources';
 import { Article } from './news/news';
 
-export interface NewsList {
-    articles: Article[];
+export interface Status {
     status: string;
+}
+
+export interface NewsList extends Status {
+    articles: Article[];
     totalResults: number;
 }
 
-export interface SourcesList {
+export interface SourcesList extends Status {
     sources: Item[];
-    status: string;
 }
 
 export class AppView {
