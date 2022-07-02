@@ -1,5 +1,5 @@
 type OptionsArgs = { endpoint: 'sources' | 'everything'; options?: Options };
-type Options = Record<string, never>;
+type Options = Record<string, unknown>;
 type Callback<T> = (data: T) => void;
 
 class Loader {
