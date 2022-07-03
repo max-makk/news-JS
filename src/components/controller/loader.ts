@@ -1,3 +1,7 @@
+enum Errors {
+    Unauthorized = 401,
+    NotFound = 404,
+}
 type OptionsArgs = { endpoint: 'sources' | 'everything'; options?: Options };
 type Options = Record<string, unknown>;
 type Callback<T> = (data: T) => void;
@@ -10,7 +14,7 @@ class Loader {
         this.options = options;
     }
 
-    getResp<T>(
+    public getResp<T>(
         { endpoint, options = {} }: OptionsArgs,
         callback: Callback<T> = () => {
             console.error('No callback for GET response');
@@ -19,9 +23,9 @@ class Loader {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: Response) {
+    private errorHandler(res: Response) {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === Errors.Unauthorized || res.status === Errors.NotFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -29,7 +33,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: Options, endpoint: string) {
+    private makeUrl(options: Options, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
