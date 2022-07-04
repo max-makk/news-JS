@@ -11,7 +11,7 @@ export interface Item {
 }
 
 class Sources {
-    draw(data: Item[]) {
+    draw(data: Item[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
         const filter = document.querySelector('#filter') as HTMLInputElement;
